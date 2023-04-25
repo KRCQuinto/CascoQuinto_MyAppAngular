@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AcercadeComponent } from './pages/acercade/acercade.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { SesionComponent } from './pages/sesion/sesion.component';
+import { ProgramacionComponent } from './pages/ofertas/programacion.component';
 
 
 const rutas:Routes=[
@@ -23,6 +24,10 @@ const rutas:Routes=[
 {
   path:'sesion',
   component:SesionComponent
+},
+{
+  path:'programacion',
+  component:ProgramacionComponent
 },
 {
   path:'**',

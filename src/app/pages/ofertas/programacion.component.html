@@ -1,0 +1,36 @@
+
+<div class="accordion accordion-flush justify-content-around container-fluid p-4" id="accordionFlushExample">
+  <div class="accordion-item">
+    <div *ngFor="let curso of cursos">
+      <h2 class="accordion-header text-center" id="flush-headingOne">
+        <button class="accordion-button collapsed panel-title" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          <div class="centrar">
+          <h1>{{curso.titulo}}</h1> 
+          </div>
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <img src="{{curso.imagen}}" class="card-img-top" alt="Descripción de la imagen">
+          
+          <p>
+           {{curso.descripcion}}
+          </p>
+          <div class="card">
+            
+            <div class="card-body">
+              
+              <h5 class="card-subtitle mb-2 text-muted">Dirigido a: </h5>
+            <h4>{{curso.publico}}</h4>
+              <h5 class="card-subtitle mb-2 text-muted">Contenido: </h5>
+              <h4>{{curso.contenidos}}</h4>
+              <a href="{{curso.clases}}" class="btn btn-primary">Iniciar</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

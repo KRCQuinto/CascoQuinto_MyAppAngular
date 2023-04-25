@@ -22,6 +22,10 @@ export class MenuComponent {
       direccion:'/contacto'
     },
     {
+      titulo:'Ofertas',
+      direccion:'/programacion'
+    },
+    {
       titulo:'Sesion',
       direccion:'/sesion'
     }

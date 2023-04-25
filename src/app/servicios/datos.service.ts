@@ -10,6 +10,10 @@ export class DatosService {
 
   getDatos()
   {
-    return this.http.get("http://localhost/datos/");
+    return this.http.get("http://localhost/datos/cursos");
+  }
+  getServis()
+  {
+    return this.http.get("http://localhost/datos/ofertas");
   }
 }

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { PagesComponent } from './pages/pages.component';
 import { SesionComponent } from './pages/sesion/sesion.component';
+import { ProgramacionComponent } from './pages/ofertas/programacion.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SesionComponent } from './pages/sesion/sesion.component';
     ContactoComponent,
     MenuComponent,
     PagesComponent,
-    SesionComponent
+    SesionComponent,
+    ProgramacionComponent
   ],
   imports: [
     AppRoutingModule,
