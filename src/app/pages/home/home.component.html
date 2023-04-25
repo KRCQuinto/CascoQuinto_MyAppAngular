@@ -6,21 +6,21 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://www.shutterstock.com/image-vector/stock-marketfinancial-market-vector-illustration-600w-743601325.jpg" class="d-block w-100" alt="...">
+      <img src="https://img.freepik.com/vector-gratis/ilustracion-concepto-consultoria-marketing_114360-9027.jpg?w=996&t=st=1682314761~exp=1682315361~hmac=88b75a755a280507605b94dd41cdaf91b08b4c1939dd7fd528c1f5b2236b10c3" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Marketing Digital</h5>
         <p>1</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://www.shutterstock.com/image-vector/concept-computer-programming-developing-software-600w-2149658841.jpg" class="d-block w-100" alt="...">
+      <img src="https://img.freepik.com/vector-gratis/concepto-desarrollo-web-plano-cms_23-2148806100.jpg?w=996&t=st=1682314705~exp=1682315305~hmac=1671d39ebfc8b327ba321b49dce23f90af9cd94365d734eedf27f27e967e9c4f" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Introducción a la programación </h5>
         <p>2</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://www.shutterstock.com/image-vector/financial-administration-concept-consulting-company-600w-1165064974.jpg" class="d-block w-100" alt="...">
+      <img src="https://img.freepik.com/vector-gratis/analisis-datos-estadisticos-administracion-financiera-diagrama-circular-segmentos-coloridos-grafico-circular-negocios-estadisticas-auditoria-consultoria_335657-764.jpg?w=740&t=st=1682314352~exp=1682314952~hmac=d3fb1ea9c983f234d88b4208b2b821de4a08dd798267f3e2fe589244fdbd0863" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Administración de Empresas</h5>
         <p>3</p>
@@ -40,22 +40,18 @@
 <section>
   <div class="container">
     <div class="row">
-<div *ngFor="let ruta of [1,2,3]" class="col-md-4">
+<div *ngFor="let curso of cursos" class="col-md-4">
   <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="{{curso.imagen}}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Título de la tarjeta</h5>
-      <p class="card-text">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
-      <a href="#" class="btn btn-primary">Ir a algún lugar</a>
+      <h5 class="card-title">{{curso.titulo}}</h5>
+      <p class="card-text">{{curso.descripcion}}</p>
+      <a href="/cursos/{curso.id}" class="btn btn-primary">ver</a>
     </div>
   </div>
 </div>
-
-
     </div>
     </div>
-
-
 </section>
 
 <br>
@@ -63,12 +59,7 @@
   <p>&copy; 2023 CURSOPOLIS. Todos los derechos reservados.</p>
   <p>Kevin Raúl Casco Quinto</p>
   <p>Teléfono: (123) 456-7890 | Correo electrónico: info@cursopolis.edu.ni.xxx</p>
-  <div class="social-media">
-    <a href="https://www.facebook.com/umdc.edu.ni" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://twitter.com/umdc_ni" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="https://www.instagram.com/umdc_ni/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.linkedin.com/school/umdc-ni/" target="_blank"><i class="fab fa-linkedin"></i></a>
-  </div>
+
   <nav>
     <ul>
       <li><a href="#">Política de privacidad</a></li>

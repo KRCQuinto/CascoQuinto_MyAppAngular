@@ -10,6 +10,6 @@ export class DatosService {
 
   getDatos()
   {
-    return this.http.get('localhost/datos');
+    return this.http.get("http://localhost/datos/");
   }
 }
