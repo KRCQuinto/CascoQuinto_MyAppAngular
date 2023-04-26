@@ -26,7 +26,7 @@ const rutas:Routes=[
   component:SesionComponent
 },
 {
-  path:'programacion',
+  path:'ofertas',
   component:ProgramacionComponent
 },
 {

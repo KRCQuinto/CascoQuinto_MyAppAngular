@@ -40,13 +40,16 @@
 <section>
   <div class="container">
     <div class="row">
+      <br>
+      <h2 class="titulo-maestros">Cursos impartidos por profesionales altamente calificados</h2>
+      <br>
 <div *ngFor="let curso of cursos" class="col-md-4">
   <div class="card" style="width: 18rem;">
     <img src="{{curso.imagen}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{curso.titulo}}</h5>
       <p class="card-text">{{curso.descripcion}}</p>
-      <a routerLink="/programacion" class="btn btn-primary">ver</a>
+      <a routerLink="/ofertas" class="btn btn-primary">¡Comenzemos!</a>
     </div>
   </div>
 </div>
@@ -55,15 +58,4 @@
 </section>
 
 <br>
-<footer>
-  <p>&copy; 2023 CURSOPOLIS. Todos los derechos reservados.</p>
-  <p>Kevin Raúl Casco Quinto</p>
-  <p>Teléfono: (123) 456-7890 | Correo electrónico: info@cursopolis.edu.ni.xxx</p>
 
-  <nav>
-    <ul>
-      <li><a href="#">Política de privacidad</a></li>
-      <li><a href="#">Términos y condiciones</a></li>
-    </ul>
-  </nav>
-</footer>

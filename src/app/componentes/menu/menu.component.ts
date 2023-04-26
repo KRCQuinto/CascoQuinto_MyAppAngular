@@ -23,7 +23,7 @@ export class MenuComponent {
     },
     {
       titulo:'Ofertas',
-      direccion:'/programacion'
+      direccion:'/ofertas'
     },
     {
       titulo:'Sesion',
