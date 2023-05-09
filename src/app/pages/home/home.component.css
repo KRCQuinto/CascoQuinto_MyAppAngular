@@ -9,3 +9,11 @@ width: 45;
 .titulo-maestros{
 text-align: center;
 }
+.carousel-caption{
+ font: Impact;
+ color: black;   
+}
+.card{
+ width: auto;
+ height: auto;   
+}

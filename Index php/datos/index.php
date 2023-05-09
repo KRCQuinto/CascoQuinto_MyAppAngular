@@ -1,23 +1,214 @@
-<?php
+<?php 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+$routesArray = explode("/", $_SERVER['REQUEST_URI']);
 
-if(isset($_GET['ruta']))
-{
-    $servidor = 'mysql:host=localhost;dbname=datos';
-    $usuario = 'root';
-    $contraseña = '';
-    $tabla= explode('/',$_GET['ruta']);
+$routesArray = array_filter($routesArray);
 
-    $pdo = new PDO($servidor, $usuario, $contraseña);
+class Connection{
 
-    $sql = "SELECT * FROM ".$tabla[0];
-    $stmt = $pdo->query($sql);
-    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	static public function connect(){
+
+		try{
+
+			$link = new PDO("mysql:host=localhost;dbname=datos","root", "");
+
+			$link->exec("set names utf8");
+
+		}catch(PDOException $e){
+
+			die("Error: ".$e->getMessage());
+
+		}
+
+		return $link;
+		
+	}
 }
-else
-$resultados=array();
 
-echo json_encode($resultados);
+
+if(count($routesArray) == 0){
+
+	$json = array(
+		'status' => 404,
+		"results" => "Not found"
+	);
+
+	echo json_encode($json, http_response_code($json["status"]));
+
+	return;
+
+}else{
+    
+    if(count($routesArray) >= 1 &&
+	   isset($_SERVER["REQUEST_METHOD"]) &&
+	   $_SERVER["REQUEST_METHOD"] == "GET"){
+        
+  //si tiene claves de busqueda
+     //  $resp =  getConsulta(explode("?", $routesArray[1])[0], $_GET["Columna"], $_GET["igual"], $_GET["select"]);
+     //  fncResponse($resp, 'getFiltro');
+      //no tiene clave
+      $resp = getConsulta2(explode("?", $routesArray[1])[0], $_GET["select"]);
+
+      fncResponse($resp, 'get');
+       }
+       if(count($routesArray) == 1 &&
+	   isset($_SERVER["REQUEST_METHOD"]) &&
+	   $_SERVER["REQUEST_METHOD"] == "POST"){
+       
+       $resp= postData($_GET["tabla"], $_POST);
+       fncResponse($resp, 'getFiltro');
+
+
+    }
+
+if(count($routesArray) == 2 &&
+ isset($_SERVER["REQUEST_METHOD"]) && 
+ $_SERVER["REQUEST_METHOD"] == "PUT"){
+    // código de respuesta para actualizar datos (PUT)
+} 
+if(count($routesArray) == 2 && 
+isset($_SERVER["REQUEST_METHOD"]) && 
+$_SERVER["REQUEST_METHOD"] == "DELETE"){
+ // código de respuesta para borrar datos (DELETE)
+    }
+     
+
+}
+
+ function postData($table, $data){
+		
+    $columns = "(";
+    $params= "(";
+
+    foreach ($data as $key => $value) {
+        
+        $columns .= $key.",";
+        $params .= ":".$key.",";
+        
+    }
+
+    $columns = substr($columns, 0, -1);
+    $params = substr($params, 0, -1);
+
+    $columns .= ")";
+    $params .= ")";
+
+    $link = Connection::connect();
+    $stmt = $link->prepare("INSERT INTO $table $columns VALUES $params");
+
+    foreach ($data as $key => $value) {
+        
+        $stmt->bindParam(":".$key, $data[$key], PDO::PARAM_STR);
+        
+    }
+
+    if($stmt->execute()){
+
+        $return = array(
+
+            "lastId"=>$link->lastInsertId(),
+            "comment"=>"The process was successful"
+        
+        );
+
+        return $return;
+
+    }else{
+
+        return Connection::connect()->errorInfo();
+    
+    }
+
+}
+
+
+function getConsulta($tabla,$colummna,$valor,$select)
+{
+    $stmt = Connection::connect()->prepare("SELECT $select FROM $tabla WHERE $colummna=$valor");
+    
+    $stmt -> execute();
+
+	return $stmt -> fetchAll(PDO::FETCH_CLASS);
+}
+function getConsulta2($tabla,$select)
+{
+    $stmt = Connection::connect()->prepare("SELECT $select FROM $tabla");
+    
+    $stmt -> execute();
+
+	return $stmt -> fetchAll(PDO::FETCH_CLASS);
+}
+
+
+
+function fncResponse($response, $method){
+
+    if(!empty($response)){
+
+        $json = array(
+            'status' => 200,
+            'total' => count($response),
+            "results" => $response
+        );
+
+    }else{
+
+        $json = array(
+            'status' => 404,
+            "results" => "Not Found",
+            'method' => $method
+        );
+
+    }
+
+    echo json_encode($json, http_response_code($json["status"]));
+
+    return;
+
+}
+
+function putDatos($table, $id, $data){
+    $updates = "";
+    foreach ($data as $key => $value) {
+        $updates .= "$key = :$key, ";
+    }
+    $updates = rtrim($updates, ", ");
+
+    $link = Connection::connect();
+    $stmt = $link->prepare("UPDATE $table SET $updates WHERE id = :id");
+
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    foreach ($data as $key => $value) {
+        $stmt->bindParam(":".$key, $data[$key], PDO::PARAM_STR);
+    }
+
+    if($stmt->execute()){
+        $return = array(
+            "comment"=>"The process was successful"
+        );
+        return $return;
+    } else {
+        return Connection::connect()->errorInfo();
+    }
+}
+
+function deleteDatos($table, $id){
+    $link = Connection::connect();
+    $stmt = $link->prepare("DELETE FROM $table WHERE id = :id");
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    if($stmt->execute()){
+        $return = array(
+            "comment"=>"The process was successful"
+        );
+        return $return;
+    } else {
+        return Connection::connect()->errorInfo();
+    }
+}
+
+
+
+

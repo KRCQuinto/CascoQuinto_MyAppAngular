@@ -14,7 +14,7 @@ export class MenuComponent {
       direccion:'/inicio'
     },
     {
-      titulo:'Acerca de',
+      titulo:'Acerca de nosotros',
       direccion:'/acercade'
     },
     {
@@ -22,7 +22,7 @@ export class MenuComponent {
       direccion:'/contacto'
     },
     {
-      titulo:'Ofertas',
+      titulo:'Cursos',
       direccion:'/ofertas'
     },
     {

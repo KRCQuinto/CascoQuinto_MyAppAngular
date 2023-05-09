@@ -16,4 +16,8 @@ export class DatosService {
   {
     return this.http.get("http://localhost/datos/ofertas");
   }
+  postDatos(tabla:string,datos:any)
+  {
+    return this.http.post("http://kevinraulquintoapp00.com?"+tabla,datos);
+  }
 }
